@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "448930022250",
+    "project_id": "documents-app-50bd0",
+    "storage_bucket": "documents-app-50bd0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448930022250:android:7f32067bedd4649df35b13",
+        "android_client_info": {
+          "package_name": "com.example.documents_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "448930022250-028d0s7akbq72ok4m27p5bi8o6e5jheu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPCiItfIjWKrnhAZRiARf3LEHIi4M4dr8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "448930022250-028d0s7akbq72ok4m27p5bi8o6e5jheu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "448930022250-g81rlnt057l443s3g1qldvkestid7bc8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.documentsApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
