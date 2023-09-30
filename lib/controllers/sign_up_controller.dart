@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:documents_app/configs/fire_base_config.dart';
 import 'package:documents_app/models/user_model.dart';
@@ -40,35 +42,35 @@ class SignUpController extends GetxController {
     }
   }
 
-  Future<void> addUserData(Map<String, dynamic> bodyParams) async {
+  Future<UserModel?> addUserData(Map<String, dynamic> bodyParams) async {
     try {
       ShowToastDialog.showLoader('Vui lòng chờ');
       DocumentReference documentReference = FirebaseConfig.db
           .collection(CollectionCloudFireStore.users)
           .doc(bodyParams['userId']);
 
-      documentReference.set(bodyParams).then((_) {
-        print('Document successfully set!');
-        ShowToastDialog.closeLoader();
-        documentReference.get().then((DocumentSnapshot documentSnapshot) {
-          if (documentSnapshot.exists) {
-            Map<String, dynamic> retrievedData =
-                documentSnapshot.data() as Map<String, dynamic>;
-
-            print('>>>check retrieved data: $retrievedData');
-          } else {
-            print('Document does not exist');
-          }
-        }).catchError((error) {
-          print('Error retrieving data: $error');
-        });
-      }).catchError((error) {
-        ShowToastDialog.closeLoader();
-        print('Error setting document: $error');
-      });
-    } catch (e) {
+      await documentReference.set(bodyParams);
+      // print('Document successfully set!');
       ShowToastDialog.closeLoader();
-      print("Error add user data: $e");
+
+      DocumentSnapshot documentSnapshot = await documentReference.get();
+      if (documentSnapshot.exists) {
+        Map<String, dynamic> retrievedData =
+            documentSnapshot.data() as Map<String, dynamic>;
+        UserModel? user = UserModel.fromJson({
+          'success': 'success',
+          'data': retrievedData,
+        });
+        // print('>>>check user from json success: ${user.toJson()}');
+        return user;
+      } else {
+        print('>>>error document does not exist');
+      }
+    } on Error catch (e) {
+      ShowToastDialog.closeLoader();
+      print(">>>error add user data: $e");
     }
+    errorMessage.value = "Đã xảy ra lỗi";
+    return null;
   }
 }

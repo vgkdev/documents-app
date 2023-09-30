@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:documents_app/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
@@ -7,6 +10,10 @@ class Preferences {
   static const isLogin = "isLogin";
   static const userId = "userId";
   static const user = "userData";
+
+  static setUserData(UserModel userModel) async {
+    await pref.setString(user, jsonEncode(userModel));
+  }
 
   static initPref() async {
     pref = await SharedPreferences.getInstance();

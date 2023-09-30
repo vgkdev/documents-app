@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -5,7 +7,6 @@ import 'package:get/get.dart';
 import '../controllers/navigation_controller.dart';
 import '../themes/global_colors.dart';
 
-// ignore: must_be_immutable
 class Navigation extends StatelessWidget {
   Navigation({super.key});
   DateTime? currentBackPressTime = DateTime.now();
@@ -48,10 +49,9 @@ class Navigation extends StatelessWidget {
                     .getBottomItemScreen(controller.selectedBottomIndex.value),
                 bottomNavigationBar: BottomNavigationBar(
                   currentIndex: controller.selectedBottomIndex.value,
-                  selectedItemColor: GlobalColors.blackIcon,
+                  selectedItemColor: GlobalColors.appColor,
                   unselectedItemColor: Colors.grey.shade400,
-                  onTap: (index) =>
-                      controller.selectedBottomIndex.value = index,
+                  onTap: (index) => controller.onSelectBottomItemScreen(index),
                   // showSelectedLabels: false,
                   // showUnselectedLabels: false,
                   type: BottomNavigationBarType.fixed,

@@ -4,15 +4,16 @@ import 'package:get/get.dart';
 class CommonWidget {
   static showSnackBarAlert({
     required String message,
-    Color color = Colors.green,
+    required Color color,
+    IconData icon = Icons.error,
   }) {
     return Get.showSnackbar(GetSnackBar(
       borderRadius: 20,
       margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
       isDismissible: true,
       message: message,
-      icon: const Icon(
-        Icons.error,
+      icon: Icon(
+        icon,
         color: Colors.white,
       ),
       backgroundColor: color,
