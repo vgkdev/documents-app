@@ -3,8 +3,10 @@ import 'package:documents_app/controllers/profile_controller.dart';
 import 'package:documents_app/routers/navigation.dart';
 import 'package:documents_app/screens/auth_screen/login_screen.dart';
 import 'package:documents_app/screens/auth_screen/sign_up_screen.dart';
+import 'package:documents_app/screens/profile_screen/personal_infomation.dart';
 import 'package:documents_app/themes/global_button.dart';
 import 'package:documents_app/themes/global_colors.dart';
+import 'package:documents_app/themes/responsive.dart';
 import 'package:documents_app/utils/Preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,6 +26,11 @@ class ProfileScreen extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       color: GlobalColors.appColor,
+                      // decoration: BoxDecoration(
+                      //     gradient: LinearGradient(colors: [
+                      //   GlobalColors.appColor,
+                      //   GlobalColors.accept
+                      // ])),
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
                         children: [
@@ -48,49 +55,45 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.home),
-                          onPressed: () {
-                            // Xử lý khi nhấn nút Home
-                          },
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.settings),
-                          onPressed: () {
-                            // Xử lý khi nhấn nút Settings
-                          },
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.notifications),
-                          onPressed: () {
-                            // Xử lý khi nhấn nút Notifications
-                          },
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.exit_to_app),
-                          onPressed: () {
-                            Preferences.clearKeyData(Preferences.isLogin);
-                            Preferences.clearKeyData(Preferences.user);
-                            Preferences.clearKeyData(Preferences.userId);
-
-                            NavigationController navigationController =
-                                Get.put(NavigationController());
-                            navigationController.isLogin.value =
-                                Preferences.getBoolean(Preferences.isLogin);
-                            Get.offAll(
-                              () => Navigation(),
-                              // duration: const Duration(milliseconds: 400),
-                              // transition: Transition.rightToLeft,
-                            );
-
-                            // CommonFunction.goHomeScreen();
-                          },
-                        ),
-                      ],
-                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        children: [
+                          profileTile(
+                            icon: Icons.person,
+                            title: 'Thông tin cá nhân',
+                            onPress: () {
+                              Get.to(PersonalInformation());
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            child: Column(children: [
+                              profileTile(
+                                icon: Icons.my_library_books_sharp,
+                                title: 'Tài liệu đã đăng',
+                                onPress: () {},
+                              ),
+                              Divider(
+                                height: 1,
+                                color: Colors.grey,
+                                indent: Responsive.width(5.0, context),
+                                endIndent: Responsive.width(5.0, context),
+                              ),
+                              profileTile(
+                                icon: Icons.notifications,
+                                title: 'Thông báo',
+                                onPress: () {},
+                              ),
+                            ]),
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 )
               : Center(
@@ -133,6 +136,36 @@ class ProfileScreen extends StatelessWidget {
                 ),
         );
       },
+    );
+  }
+
+  Widget profileTile({
+    required IconData icon,
+    required String title,
+    required Function()? onPress,
+  }) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(20.0),
+      onTap: onPress,
+      child: Ink(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+          child: Row(
+            children: [
+              Icon(icon),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(title),
+              ),
+              const Icon(Icons.keyboard_arrow_right),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

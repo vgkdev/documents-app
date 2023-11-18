@@ -7,6 +7,7 @@ class CommonWidget {
     required Color color,
     IconData icon = Icons.error,
   }) {
+    print('>>>check message snackbar: ${message}');
     return Get.showSnackbar(GetSnackBar(
       borderRadius: 20,
       margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
@@ -28,5 +29,18 @@ class CommonWidget {
       //   ],
       // ),
     ));
+    // Get.snackbar(
+    //   '',
+    //   message,
+    //   colorText: Colors.white,
+    //   icon: Icon(
+    //     icon,
+    //     color: Colors.white,
+    //   ),
+    //   backgroundColor: color,
+    //   snackPosition: SnackPosition.BOTTOM,
+    //   duration: const Duration(seconds: 5),
+    //   isDismissible: true,
+    // );
   }
 }

@@ -122,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: GlobalButton.buildButton(
                             context,
                             title: 'Chia sẻ',
-                            btnColor: Colors.blueAccent,
+                            btnColor: GlobalColors.appColor,
                             txtColor: Colors.white,
                             btnWidthRatio: 0.3,
                             btnHeight: 35,
